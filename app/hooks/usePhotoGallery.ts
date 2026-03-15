@@ -8,6 +8,7 @@ export const usePhotoGallery = ({ initialData }: { initialData: Photo[] }) => {
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [isFetching, setIsFetching] = useState(false);
+    const [error, setError] = useState(false);
 
     const requestDelayRef = useRef<number>(TIME.MIN_REQUEST_DELAY_MS);
     const isFetchingRef = useRef(false);
@@ -39,8 +40,10 @@ export const usePhotoGallery = ({ initialData }: { initialData: Photo[] }) => {
             setHasMore(newPhotos.length === APP_CONFIG.DEFAULT_PAGE_SIZE);
             requestDelayRef.current = TIME.MIN_REQUEST_DELAY_MS;
 
-        } catch (error) {
-            console.error("[Hook Error]: Failed to load more photos", error);
+        } catch (err) {
+            console.error("[Hook Error]: Failed to load more photos", err);
+            setError(true);
+            setHasMore(false);
         } finally {
             isFetchingRef.current = false;
             setIsFetching(false);
@@ -59,6 +62,7 @@ export const usePhotoGallery = ({ initialData }: { initialData: Photo[] }) => {
         handleDelete,
         loadMorePhotos,
         hasMore,
-        isFetching
+        isFetching,
+        error
     };
 };

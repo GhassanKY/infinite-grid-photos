@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import { usePhotoGallery } from '../hooks/usePhotoGallery';
 import PhotoCard from './PhotoCard';
 import { EndMessage } from './EndMessage';
+import { ErrorMessage } from './ErrorMessage';
 import { LoadingFallback } from './LoadingFallback';
 import { Photo } from '../interface/photo.interface';
 
@@ -12,7 +13,7 @@ interface PhotoGalleryProps {
 }
 
 export default function PhotoGallery({ initialData }: PhotoGalleryProps) {
-  const { photos, handleDelete, loadMorePhotos, hasMore } = usePhotoGallery({ initialData });
+  const { photos, handleDelete, loadMorePhotos, hasMore, error } = usePhotoGallery({ initialData });
 
   return (
     <InfiniteScroll
@@ -20,7 +21,7 @@ export default function PhotoGallery({ initialData }: PhotoGalleryProps) {
       next={loadMorePhotos}
       hasMore={hasMore}
       loader={<LoadingFallback />}
-      endMessage={<EndMessage />}
+      endMessage={error ? <ErrorMessage /> : <EndMessage />}
       style={{ overflow: 'visible' }}
       scrollThreshold={0.8}
     >

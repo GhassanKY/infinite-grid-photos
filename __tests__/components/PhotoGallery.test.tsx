@@ -91,11 +91,28 @@ describe('PhotoGallery Component', () => {
             loadMorePhotos: jest.fn(),
             hasMore: false,
             isFetching: false,
+            error: false,
         });
 
         render(<PhotoGallery initialData={mockInitialData} />);
 
         const endMessage = screen.getByText('You have reached the end of this gallery.');
         expect(endMessage).toBeInTheDocument();
+    });
+
+    it('should display the ErrorMessage when an error occurs', () => {
+        (usePhotoGallery as jest.Mock).mockReturnValue({
+            photos: mockInitialData,
+            handleDelete: jest.fn(),
+            loadMorePhotos: jest.fn(),
+            hasMore: false,
+            isFetching: false,
+            error: true,
+        });
+
+        render(<PhotoGallery initialData={mockInitialData} />);
+
+        expect(screen.getByText('Something went wrong. Please try again later.')).toBeInTheDocument();
+        expect(screen.queryByText('You have reached the end of this gallery.')).not.toBeInTheDocument();
     });
 });
