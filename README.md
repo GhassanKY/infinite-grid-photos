@@ -58,6 +58,10 @@ No se utiliza `.env` en este proyecto. La API de picsum.photos es completamente 
 
 La lógica de estado y paginación de la galería se encapsula en un hook personalizado (`usePhotoGallery`), separando claramente la lógica de negocio de los componentes de UI.
 
+### Accesibilidad
+
+Cada imagen eliminable está implementada como un `<button>` nativo, lo que permite navegar entre ellas con **Tab** y activar la eliminación con **Enter** o **Space**.
+
 ### Estrategia de testing
 
 Se utiliza **Jest** junto con **React Testing Library** siguiendo un enfoque **user-centric**, probando el comportamiento visible para el usuario (renderizado, carga de elementos, eliminación) en lugar de estados internos de los componentes.
@@ -121,3 +125,5 @@ Durante el desarrollo se utilizaron herramientas de **IA generativa (Claude Code
 - Ayuda puntual en **refactorización y simplificación de código repetitivo**, especialmente en el manejo de errores de red.
 
 Todas las decisiones finales de arquitectura, organización del proyecto y validación del comportamiento del código fueron revisadas y ajustadas manualmente.
+
+También se utilizó IA para generar este README.
