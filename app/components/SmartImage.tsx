@@ -42,8 +42,7 @@ const SmartImage = ({
         alt={alt}
         onLoad={() => setIsLoading(false)}
         onError={() => { setHasError(true); setIsLoading(false); }}
-        className={`block h-full w-full rounded-xl object-cover transition-[opacity,filter,transform] duration-500 ease-out ${className ?? ''
-          } ${isLoading ? 'opacity-0 blur-sm scale-[1.02]' : 'opacity-100 blur-0 scale-100'}`}
+        className={`block h-full w-full rounded-xl object-cover ${className ?? ''}`}
       />
 
       <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300
